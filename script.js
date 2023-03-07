@@ -1,4 +1,7 @@
+let count = 1
+
 function getMO() {
+
     ////////// αριθμος περασμενων μαθηματων + τωρινος Μ.0
     let lessons1 = parseInt(Number(document.querySelectorAll('input')[0].value));
     let lessons2 = parseInt(Number(document.querySelectorAll('input')[1].value));
@@ -6,23 +9,21 @@ function getMO() {
 
     if (mo >= 5 && mo <= 10 && (lessons1 > 0 || lessons2 > 0)) {
 
-
-
         ////////// διπλωματικη + βαθμοι μαθηματων
-
-        let test = document.querySelectorAll('input')
+        let lesson = document.querySelectorAll('input')
         let inputs1 = []
+        let inputs2 = []
         let sum1 = 0
         let sum2 = 0
-        let inputs2 = []
         for (let i = 3; i < test.length - 1; i++) {
-            if (test[i].name == "input1" && Number(test[i].value) >= 5 && Number(test[i].value) <= 10) {
-                inputs1.push(Number(test[i].value) * 1.5)
-                sum1 = sum1 + Number(test[i].value) * 1.5
+            let grade = Number(lesson[i].value)
+            if (test[i].name == "input1" && grade >= 5 && grade <= 10) {
+                inputs1.push(grade * 1.5)
+                sum1 = sum1 + grade * 1.5
             }
-            if (test[i].name == "input2" && Number(test[i].value) >= 5 && Number(test[i].value) <= 10) {
-                inputs2.push(Number(test[i].value) * 2)
-                sum2 = sum2 + Number(test[i].value) * 2
+            if (test[i].name == "input2" && grade >= 5 && grade <= 10) {
+                inputs2.push(grade * 2)
+                sum2 = sum2 + grade * 2
             }
         }
         let length1 = inputs1.length
@@ -31,7 +32,6 @@ function getMO() {
         let thesis = Number(document.getElementById('input3').value);
 
         ////////// αρχικος μ.ο και μεταβλητες υπολογισμου
-
         let A = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
         let current = mo * A
         let lessons = (thesis >= 5 && thesis <= 10) ? (A + length1 * 1.5 + length2 * 2 + 15) : (A + length1 * 1.5 + length2 * 2)
@@ -48,12 +48,12 @@ function getMO() {
         new_mo = new_mo.toPrecision(3)
 
         let show = document.createElement('div')
-        show.innerText = "Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: " + new_mo
+        show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ` + new_mo
         show.style.color = "blue";
         document.querySelector('form').appendChild(show)
     }
     else {
-        window.alert("Δώσε Μ.Ο. και περασμένα μαθήματα")
+        window.alert("Δώσε τωρινό Μ.Ο. και περασμένα μαθήματα")
     }
 }
 
