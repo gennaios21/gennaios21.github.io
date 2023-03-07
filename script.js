@@ -32,7 +32,7 @@ function getMO() {
     let current = mo * A
     let lessons = (thesis >= 5 && thesis <= 10) ? (A + length1 * 1.5 + length2 * 2 + 15) : (A + length1 * 1.5 + length2 * 2)
 
-    // ελεγχοι για τιμες μεταξυ 5 και 10
+    /// ελεγχοι για τιμες μεταξυ 5 και 10
     thesis = (thesis >= 5 && thesis <= 10) ? thesis : 0
     lessons1 = (lessons1 >= 0 && lessons1 <= 39) ? lessons1 : window.alert("Αρ. μαθημάτων με συντελεστή 1.5 για πτυχίο: 27 μαθήματα κορμού και το πολύ 12 κατεύθυνσης")
     lessons2 = (lessons2 >= 0 && lessons2 <= 27) ? lessons1 : window.alert("Αρ. μαθημάτων με συντελεστή 2 για πτυχίο: 11 μαθήματα κορμού, τουλάχιστον 4 κατεύθυνσης (4 υποχρεωτικά εργαστήρια) και το πολύ 16 κατεύθυνσης")
