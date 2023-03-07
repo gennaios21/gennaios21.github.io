@@ -15,13 +15,13 @@ function getMO() {
         let inputs2 = []
         let sum1 = 0
         let sum2 = 0
-        for (let i = 3; i < test.length - 1; i++) {
+        for (let i = 3; i < lesson.length - 1; i++) {
             let grade = Number(lesson[i].value)
-            if (test[i].name == "input1" && grade >= 5 && grade <= 10) {
+            if (lesson[i].name == "input1" && grade >= 5 && grade <= 10) {
                 inputs1.push(grade * 1.5)
                 sum1 = sum1 + grade * 1.5
             }
-            if (test[i].name == "input2" && grade >= 5 && grade <= 10) {
+            if (lesson[i].name == "input2" && grade >= 5 && grade <= 10) {
                 inputs2.push(grade * 2)
                 sum2 = sum2 + grade * 2
             }
@@ -32,9 +32,9 @@ function getMO() {
         let thesis = Number(document.getElementById('input3').value);
 
         ////////// αρχικος μ.ο και μεταβλητες υπολογισμου
-        let A = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
-        let current = mo * A
-        let lessons = (thesis >= 5 && thesis <= 10) ? (A + length1 * 1.5 + length2 * 2 + 15) : (A + length1 * 1.5 + length2 * 2)
+        let grades = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
+        let current = mo * grades
+        let lessons = (thesis >= 5 && thesis <= 10) ? (grades + length1 * 1.5 + length2 * 2 + 15) : (grades + length1 * 1.5 + length2 * 2)
 
         /// ελεγχοι για τιμες μεταξυ 5 και 10
         thesis = (thesis >= 5 && thesis <= 10) ? thesis : 0
@@ -48,7 +48,7 @@ function getMO() {
         new_mo = new_mo.toPrecision(3)
 
         let show = document.createElement('div')
-        show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ` + new_mo
+        show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ${new_mo}`
         show.style.color = "blue";
         document.querySelector('form').appendChild(show)
     }
