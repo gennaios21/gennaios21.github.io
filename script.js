@@ -4,7 +4,7 @@ function getMO() {
     let lessons2 = parseInt(Number(document.querySelectorAll('input')[1].value));
     let mo = (document.querySelectorAll('input')[2].value);
 
-    if (mo >= 5 && mo <= 5 && (lessons1 > 0 || lessons2 > 0)) {
+    if (mo >= 5 && mo <= 10 && (lessons1 > 0 || lessons2 > 0)) {
 
 
 
