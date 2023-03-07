@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΗΜΤΥ Μ.Ο.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <!-- title, text etc. -->
+
+        <h1>ΗΜΤΥ Μ.Ο. </h1>
+
+        <h4>Το παρακάτω πρόγραμμα υπολογίζει τον νέο Μ.Ο. σου αν περάσεις όσα μαθήματα θες ή/και την διπλωματική,
+            ανάλογα με τον συντελεστή και τον βαθμό τους. Μπορείς να δεις τους συντελεστές των μαθημάτων στο progress.
+            (Κάνε refresh για να μηδενιστούν οι τιμές).</h4>
+
+        <ul>
+            <li>Τα μαθήματα χωρίς εργαστήριο έχουν συντελεστή βαρύτητας 1.5 (το εργαστήριο φυσικής έχει 1 αλλά είναι
+                αμελητέα η διαφορά για ένα μάθημα, θεωρείστε ότι έχει συντελεστή 1.5).</li>
+            <li>Μαθήματα με εργαστήριο ή μαθήματα με 5 ώρες θεωρίας (π.χ. Λογισμός 1, Μικροηλεκτρονικές, ΜΔΕ κλπ.) έχουν
+                συντελεστή 2.</li>
+            <li>Ομοίως για τα μαθήματα των κατευθύνσεων.</li>
+            <li>(Για τα 3 πρώτα έτη: 11 μαθήματα με συντελεστή 2 και  27 με συντελεστή 1.5)</li>
+        </ul>
+        <!-- form -->
+        <form action="submit">
+
+            <!-- Περασμένα μαθήματα -->
+            <div class="input">
+                <label for="lessons1">Αριθμός περασμένων μαθημάτων με συντελεστή 1.5: </label>
+                <input type="number" placeholder="0" name="lessons1" min="0" max="50" required id="lessons1">
+            </div>
+            <div class="input">
+                <label for="lessons2">Αριθμός περασμένων μαθημάτων με συντελεστή 2: </label>
+                <input type="number" placeholder="0" name="lessons2" min="0" max="40" required id="lessons2">
+            </div>
+            <div class="input">
+                <label for="mo">Τωρινός M.O. πτυχίου (Progress -> Ακαδημαϊκό έργο, κάτω μέρος): </label>
+                <input type="number" placeholder="0" name="mo" min="5.0" max="10.0" required id="mo">
+            </div>
+
+            <div id="line"></div>
+
+            <!-- Ζητούμενα μαθήματα -->
+            <div class="input" id="input1">
+                <label for="metavolh1">-> Βαθμός μαθήματος με συντελεστή 1.5: </label>
+                <input type="number" placeholder="0" name="input1" min="5.0" max="10.0" required id="metavolh1">
+                <button type="button" onclick="addLesson(1.5)" class="add">+</button>
+            </div>
+            <div class="input" id="input2">
+                <label for="metavolh2">-> Βαθμός μαθήματος με συντελεστή 2: </label>
+                <input type="number" placeholder="0" name="input2" min="5.0" max="10.0" required id="metavolh2">
+                <button type="button" onclick="addLesson(2)" class="add">+</button>
+            </div>
+            <div class="input">
+                <label for="thesis">-> Βαθμός διπλωματικής (συντελεστής 15): </label>
+                <input id="input3" type="number" placeholder="0" name="thesis" min="5.0" max="10.0" required id="thesis">
+            </div>
+
+            <!-- Submit button -->
+            <button type="button" onclick="getMO()" class="btn">Υπολογισμός Νέου Μ.Ο.</button>
+        </form>
+    </main>
+    <!-- footer -->
+    <script src="script.js"></script>
+    <p>&copy; Γενναίος Λυκουργιώτης - Αιχμή του δόρατος, 2022.
+    <article>Η ειλικρίνεια είναι σαν το λουλούδι</article>
+    </p>
+</body>
+
+</html>
