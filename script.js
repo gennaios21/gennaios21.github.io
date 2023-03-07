@@ -71,6 +71,7 @@ function addLesson(k) {
         input.style.width = "100px"
         input.min = 5
         input.max = 10
+        input.step = 0.5
 
         let button = document.createElement('button')
         button.textContent = "-"
