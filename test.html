@@ -1,0 +1,60 @@
+<html>
+<head>
+<input type="file" id="fileinput" />
+<script type="text/javascript">
+  function readSingleFile(evt) {
+    var f = evt.target.files[0];   
+    if (f) {
+      var r = new FileReader();
+      r.onload = function(e) { 
+          var contents = e.target.result;             
+          var ct = r.result;
+          var words = ct.split(' ');  //this is not needed
+
+          let input_file_as_text = words.join(); //this is bullshit
+          //input_file_as_text = input_file_as_text
+          input_file_as_text=input_file_as_text.replace("\n"," "); //remove newline characters
+          const regex = /.*([5-9]|10),(0|5).*2.*(1,5|2,0|1,0)/g; // basically match a passing grade (e.g. 8,5 or 10,0 or 5,0) followed by anything and then a "2" (the 2022 following grades in a line, this is to differentiate from other random text that follows thsi pattern) then followed by anything and finally followed by one of 1,0 1,5 1,2
+          const found = input_file_as_text.match(regex); //find matches for pattern
+          console.log(found.length);
+          grade_sum=0;
+          weight_sum=0;
+          for(let i=0;i<found.length;i++){
+            
+            line=found[i].replace(/[\u0009]/g," "); //replace control character to space for spliting later
+            let grade= line.split(" ")[5].replace(",","."); //get 6.5 from 6,5
+            
+            let weight = line.split(",,").at(-1).replace(",",".");
+
+            console.log(i+" "+grade+" "+weight);
+
+
+            english="ECE_ΞΓ210";
+            if(line.includes(english)){ //ignore english
+                console.log(line)
+                grade=0;
+                weight=0;
+            }
+
+            
+            grade_sum=grade_sum+parseFloat(grade*weight);
+            weight_sum=weight_sum+parseFloat(weight);
+            //console.log(weight_sum);
+
+          }
+          console.log(grade_sum/weight_sum);
+      
+          
+      }
+      r.readAsText(f,"CP1253");
+    } else { 
+      alert("Failed to load file");
+    }
+  }
+
+  document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+</script>
+</head>
+<body>
+</body>
+</html>

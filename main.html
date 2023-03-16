@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ΗΜΤΥ Μ.Ο.</title>
     <link rel="stylesheet" href="style.css">
+    
+
 </head>
 
 <body>
@@ -29,6 +31,8 @@
         </ul>
         <!-- form -->
         <form action="submit">
+            <label for="fileinput">Εδώ μπορείς να εισάγεις το αρχείο WDP.xls της αναλυτικής βαθμολογίας από το κουμπί "export" στο Progress για να συμπληρωθούν αυτόματα τα παρακάτω πεδία: </label>
+            <input type="file" id="fileinput" accept=".xls"/>
 
             <!-- Περασμένα μαθήματα -->
             <div class="input">
@@ -68,9 +72,74 @@
     </main>
     <!-- footer -->
     <script src="script.js"></script>
-    <p>&copy; Γενναίος Λυκουργιώτης - Αιχμή του δόρατος, 2023.
+    <p>&copy; Γενναίος Λυκουργιώτης & Ιωάννης Τσάμπρας - Αιχμή του δόρατος, 2023
     <article>Η ειλικρίνεια είναι σαν το λουλούδι</article>
     </p>
 </body>
+<script type="text/javascript">
+    function readSingleFile(evt) {
+        var f = evt.target.files[0];   
+        if (f) {
+        var r = new FileReader();
+        r.onload = function(e) { 
+            var contents = e.target.result;             
+            var ct = r.result;
+            var words = ct.split(' ');  //this is not needed
+
+            let input_file_as_text = words.join(); //this is bullshit
+            //input_file_as_text = input_file_as_text
+            input_file_as_text=input_file_as_text.replace("\n"," "); //remove newline characters
+            const regex = /.*([5-9]|10),(0|5).*2.*(1,5|2,0|1,0)/g; // basically match a passing grade (e.g. 8,5 or 10,0 or 5,0) followed by anything and then a "2" (the 2022 following grades in a line, this is to differentiate from other random text that follows thsi pattern) then followed by anything and finally followed by one of 1,0 1,5 1,2
+            const found = input_file_as_text.match(regex); //find matches for pattern
+            console.log(found.length);
+            let grade_sum=0;
+            let weight_sum=0;
+            let lessons1=0;
+            let lessons2=0;
+
+            for(let i=0;i<found.length;i++){
+                
+                line=found[i].replace(/[\u0009]/g," "); //replace control character to space for spliting later
+                let grade= line.split(" ")[5].replace(",","."); //get 6.5 from 6,5
+                
+                let weight = line.split(",,").at(-1).replace(",",".");
+
+                console.log(i+" "+grade+" "+weight);
+
+
+                english="ECE_ΞΓ210";
+                if(line.includes(english)){ //ignore english
+                    console.log("ignoring english")
+                    grade=0;
+                    weight=0;
+                }
+                if(weight==1.5 || weight==1.0){
+                    lessons1=lessons1+1;
+                }
+                if(weight==2.0){
+                    lessons2=lessons2+1;
+                }
+                
+                grade_sum=grade_sum+parseFloat(grade*weight);
+                weight_sum=weight_sum+parseFloat(weight);
+                //console.log(weight_sum);
+
+            }
+            console.log(grade_sum/weight_sum);
+            let average=Math.round(100*grade_sum/weight_sum)/100;
+            document.getElementById("lessons1").value=lessons1;
+            document.getElementById("lessons2").value=lessons2;
+            document.getElementById("mo").value=average;
+        
+            
+        }
+        r.readAsText(f,"CP1253");
+        } else { 
+        alert("Failed to load file");
+        }
+    }
+
+    document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+    </script>
 
 </html>
