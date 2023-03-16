@@ -8,13 +8,14 @@ body {
     background-color: rgb(219, 233, 246);
 }
 
-h1{
+h1 {
     text-align: center;
     margin: 0;
     padding: 0;
 }
-h4{
-    font-style: italic;
+
+h4 {
+    /* font-style: italic; */
     font-weight: 400;
 }
 
@@ -101,21 +102,33 @@ p:hover+article {
 
 
 
-#line{
+#line {
     margin: 15px;
     padding: 0;
     border: 1px dashed black;
 }
 
-div button{
+div button {
     font-size: 1em;
     color: red;
     background-color: yellow;
     border: 1px solid black;
 }
 
-div button:hover{
+div button:hover {
     cursor: pointer;
-    transform:scale(1.2);
+    transform: scale(1.2);
     transition: 0.3s;
+}
+
+/* import file */
+
+.fileinput {
+    font-style: italic;
+    font-weight: bold;
+}
+
+#fileinput {
+    padding: 10px 0px;
+    color: red;
 }
