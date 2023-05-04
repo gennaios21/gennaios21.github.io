@@ -32,12 +32,7 @@ function readSingleFile(evt) {
                 console.log(i + " " + grade + " " + weight);
 
 
-                english = "ECE_ΞΓ210";
-                if (line.includes(english)) { //ignore english
-                    console.log("ignoring english")
-                    grade = 0;
-                    weight = 0;
-                }
+
                 if (weight == 1.5 || weight == 1.0) {
                     lessons11 = lessons11 + 1;
                 }
@@ -128,6 +123,7 @@ function getMO() {
     ////////// νεος Μ.Ο
     let new_mo = (current + sum1 + sum2 + thesis * 15) / lessons
     new_mo = new_mo.toPrecision(3)
+    console.log(new_mo);
 
 
     let show = document.createElement('div')
