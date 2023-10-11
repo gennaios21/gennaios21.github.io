@@ -1,3 +1,6 @@
+let ece_thesis_weight = 15
+let ceid_thesis_weight = 10
+
 //////////// import file function
 
 let readSingleFileCounter = 0
@@ -83,10 +86,14 @@ function getMO() {
 
     else {
         ////////// αριθμος περασμενων μαθηματων + τωρινος Μ.0
-        lessons1 = parseInt(Number(document.querySelectorAll('input')[1].value));
-        lessons2 = parseInt(Number(document.querySelectorAll('input')[2].value));
-        mo = (document.querySelectorAll('input')[3].value);
+        lessons1 = parseInt(Number(document.querySelectorAll('input')[3].value));
+        lessons2 = parseInt(Number(document.querySelectorAll('input')[4].value));
+        mo = (document.querySelectorAll('input')[5].value);
     }
+
+
+    ////////// επιλογη σχολης
+    let school = document.querySelector('input[name="school"]:checked').value;
 
     ////////// διπλωματικη + βαθμοι μαθηματων
     let lesson = document.querySelectorAll('input')
@@ -108,12 +115,18 @@ function getMO() {
     let length1 = inputs1.length
     let length2 = inputs2.length
 
-    let thesis = Number(document.getElementById('input3').value);
+    /////// βαθμος και συντελεστης διπλωματικης ανα σχολη
+    let thesis = Number(document.getElementById('thesis').value);
+    let thesis_weight
+    if(school == 'ECE')
+        thesis_weight = ece_thesis_weight
+    else if (school == 'CEID')
+        thesis_weight = ceid_thesis_weight
 
     ////////// αρχικος μ.ο και μεταβλητες υπολογισμου
     let grades = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
     let current = mo * grades
-    let lessons = (thesis >= 5 && thesis <= 10) ? (grades + length1 * 1.5 + length2 * 2 + 15) : (grades + length1 * 1.5 + length2 * 2)
+    let lessons = (thesis >= 5 && thesis <= 10) ? (grades + length1 * 1.5 + length2 * 2 + thesis_weight) : (grades + length1 * 1.5 + length2 * 2)
 
     /// ελεγχοι για τιμες μεταξυ 5 και 10
     thesis = (thesis >= 5 && thesis <= 10) ? thesis : 0
@@ -122,7 +135,7 @@ function getMO() {
     mo = (mo >= 5 && mo <= 10) ? mo : window.alert("Πες την αλήθεια ωρέ, τι Μ.Ο έχεις;")
     
     ////////// νεος Μ.Ο.
-    let new_mo = (current + sum1 + sum2 + thesis * 15) / lessons ;
+    let new_mo = (current + sum1 + sum2 + thesis * thesis_weight) / lessons ;
     console.log(new_mo); //log M.O. with full accuracy
     new_mo = new_mo.toPrecision(3)
     
@@ -131,10 +144,10 @@ function getMO() {
     let show = document.createElement('div')
     show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ${new_mo}`
     show.style.color = "blue";
-    document.querySelector('form').appendChild(show)
+    if(!isNaN(new_mo))
+        document.querySelector('form').appendChild(show)
 
 }
-
 
 ////////// προσθηκη και αφαιρεση μαθηματων
 let counter = 1
