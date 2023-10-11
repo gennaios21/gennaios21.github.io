@@ -132,3 +132,19 @@ div button:hover {
     padding: 10px 0px;
     color: red;
 }
+
+/* school selection */
+.school-selection{
+    display: flex;
+    
+}
+
+#select-school{
+   padding-right: 10px;
+    font-size: 1em;
+}
+
+.school-selection label{
+    padding-left: 20px;
+    padding-right: 0px;
+}
