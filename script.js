@@ -83,9 +83,9 @@ function getMO() {
 
     else {
         ////////// αριθμος περασμενων μαθηματων + τωρινος Μ.0
-        lessons1 = parseInt(Number(document.querySelectorAll('input')[0].value));
-        lessons2 = parseInt(Number(document.querySelectorAll('input')[1].value));
-        mo = (document.querySelectorAll('input')[2].value);
+        lessons1 = parseInt(Number(document.querySelectorAll('input')[1].value));
+        lessons2 = parseInt(Number(document.querySelectorAll('input')[2].value));
+        mo = (document.querySelectorAll('input')[3].value);
     }
 
     ////////// διπλωματικη + βαθμοι μαθηματων
@@ -120,6 +120,7 @@ function getMO() {
     lessons1 = (lessons1 >= 0 && lessons1 <= 39) ? lessons1 : window.alert("Αρ. μαθημάτων με συντελεστή 1.5 για πτυχίο: 27 μαθήματα κορμού και το πολύ 12 κατεύθυνσης")
     lessons2 = (lessons2 >= 0 && lessons2 <= 27) ? lessons1 : window.alert("Αρ. μαθημάτων με συντελεστή 2 για πτυχίο: 11 μαθήματα κορμού, τουλάχιστον 4 κατεύθυνσης (4 υποχρεωτικά εργαστήρια) και το πολύ 16 κατεύθυνσης")
     mo = (mo >= 5 && mo <= 10) ? mo : window.alert("Πες την αλήθεια ωρέ, τι Μ.Ο έχεις;")
+    
     ////////// νεος Μ.Ο.
     let new_mo = (current + sum1 + sum2 + thesis * 15) / lessons ;
     console.log(new_mo); //log M.O. with full accuracy
