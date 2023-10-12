@@ -15,7 +15,7 @@
     <main>
         <!-- title, text etc. -->
 
-        <h1>ΗΜΤΥ Μ.Ο. </h1>
+        <h1>Μέσος Όρος Πτυχίου</h1>
 
         <h4>Το παρακάτω πρόγραμμα υπολογίζει τον νέο Μ.Ο. σου αν περάσεις όσα μαθήματα θες ή/και την διπλωματική,
             ανάλογα με τον συντελεστή και τον βαθμό τους. Μπορείς να δεις τους συντελεστές των μαθημάτων στο progress, ή να κάνεις import το WDP.xls (δες παρακάτω).
@@ -25,15 +25,12 @@
         <!-- Επιλογή σχολής -->
         <div class = "school-selection">
             <p id="select-school">Διάλεξε το τμήμα σου: </p>
-            <div>
-                <label for="ece">ΗΜΤΥ</label>
-                <input type="radio" id="ece" name="school" value="ECE" checked>
-            </div>
             
-            <div>
-                <label for="ceid">CEID</label>
-                <input type="radio" id="ceid" name="school" value="CEID">
-            </div>
+        </div>
+
+        <!-- Συντελεστης διπλωματικης ανα σχολη -->
+        <div class="thesis_weight">    
+                       
         </div>
         
 
@@ -77,7 +74,7 @@
                 <button type="button" onclick="addLesson(2)" class="add">+</button>
             </div>
             <div class="input">
-                <label for="thesis">-> Βαθμός διπλωματικής (συντελεστής 15): </label>
+                <label for="thesis">-> Βαθμός διπλωματικής: </label>
                 <input id="thesis" type="number" placeholder="0" name="thesis" min="5.0" max="10.0" step="0.5" required
                     id="thesis">
             </div>

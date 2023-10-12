@@ -148,3 +148,7 @@ div button:hover {
     padding-left: 20px;
     padding-right: 0px;
 }
+
+.thesis_weight p{
+    font-size: 1em;
+}

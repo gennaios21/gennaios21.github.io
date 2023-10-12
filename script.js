@@ -1,7 +1,47 @@
-let ece_thesis_weight = 15
-let ceid_thesis_weight = 10
+////////////////// σε περιπτωση νεου τμηματος, προσθεστε το με την ιδια δομη στην παρακατω λιστα
+let thesis_weights = {
+    ece : ["ΗΜΤΥ" , 15],
+    ceid : ["CEID", 10],
+}
 
-//////////// import file function
+////////////////////// radio button και πληροφοριες διπλωματικης ανα σχολη
+let thesis_weight_info = document.querySelector('.thesis_weight')
+let school_selected = document.querySelector(".school-selection")
+
+let checked_radio = 1 
+
+for(let thesis_w in thesis_weights){
+
+    ///// πληροφορια για τον συντελεστη διπλωματικης
+    const par = document.createElement("p")
+    let par_text = document.createTextNode(`${thesis_weights[thesis_w][0]} - συντελεστής διπλωματικής: ${thesis_weights[thesis_w][1]}`);
+    par.appendChild(par_text)
+    thesis_weight_info.appendChild(par)
+
+    ///// radio button για επιλογη σχολης
+    const div_school = document.createElement("div")
+    
+    let lab = document.createElement("label")
+    lab.setAttribute("for",thesis_w)
+    let label_text = document.createTextNode(thesis_weights[thesis_w][0])
+    lab.appendChild(label_text)
+
+    const radio = document.createElement("input")
+    radio.setAttribute("type", "radio")
+    radio.setAttribute("id", thesis_w)
+    radio.setAttribute("name", "school")
+    radio.setAttribute("value", thesis_w)
+    if(checked_radio == 1)
+        radio.checked = true
+    checked_radio=0
+
+    div_school.appendChild(lab)
+    div_school.appendChild(radio)
+    school_selected.appendChild(div_school)
+}
+
+
+////////////////////////////////////////////////////////////////// import WDPS.xls file function
 
 let readSingleFileCounter = 0
 let lessons11 = 0;
@@ -70,7 +110,7 @@ function readSingleFile(evt) {
 }
 document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 
-/////////////////////////////////////// calculate average 
+////////////////////////////////////////////////////// calculate average 
 let count = 1
 
 function getMO() {
@@ -90,7 +130,6 @@ function getMO() {
         lessons2 = parseInt(Number(document.querySelectorAll('input')[4].value));
         mo = (document.querySelectorAll('input')[5].value);
     }
-
 
     ////////// επιλογη σχολης
     let school = document.querySelector('input[name="school"]:checked').value;
@@ -117,11 +156,15 @@ function getMO() {
 
     /////// βαθμος και συντελεστης διπλωματικης ανα σχολη
     let thesis = Number(document.getElementById('thesis').value);
+    
     let thesis_weight
-    if(school == 'ECE')
-        thesis_weight = ece_thesis_weight
-    else if (school == 'CEID')
-        thesis_weight = ceid_thesis_weight
+    if(school == 'ece')
+        thesis_weight = thesis_weights.ece[1]
+    else if (school == 'ceid')
+        thesis_weight = thesis_weights.ceid[1]
+
+    // let thesis_label = document.querySelectorAll('label')[8]
+    // thesis_label.innerText = `-> Βαθμός διπλωματικής (συντελεστής ${thesis_weight}): `
 
     ////////// αρχικος μ.ο και μεταβλητες υπολογισμου
     let grades = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
@@ -136,20 +179,22 @@ function getMO() {
     
     ////////// νεος Μ.Ο.
     let new_mo = (current + sum1 + sum2 + thesis * thesis_weight) / lessons ;
-    console.log(new_mo); //log M.O. with full accuracy
     new_mo = new_mo.toPrecision(3)
     
-
-
+    /////////// Πληροφορια για τον νεο ΜΟ
     let show = document.createElement('div')
-    show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ${new_mo}`
+    if(school == 'ece')
+        show.innerText = `(${count++}) Συγχαρητήρια μηχανευτή. Ο νέος Μ.Ο. σου είναι: ${new_mo}`
+    else
+        show.innerText = `(${count++}) Συγχαρητήρια! Ο νέος Μ.Ο. σου είναι: ${new_mo}`
+
     show.style.color = "blue";
     if(!isNaN(new_mo))
         document.querySelector('form').appendChild(show)
 
 }
 
-////////// προσθηκη και αφαιρεση μαθηματων
+/////////////////////////////////////////////////////// προσθηκη και αφαιρεση μαθηματων
 let counter = 1
 function addLesson(k) {
     counter++
