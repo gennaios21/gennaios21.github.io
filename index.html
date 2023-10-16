@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΗΜΤΥ Μ.Ο.</title>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <main>
+        <!-- title, text etc. -->
+        <h1>Μέσος Όρος Πτυχίου</h1>
+
+        <h4>Το παρακάτω πρόγραμμα υπολογίζει τον νέο Μ.Ο. σου αν περάσεις όσα μαθήματα θες ή/και την διπλωματική,
+            ανάλογα με τον συντελεστή και τον βαθμό τους. Μπορείς να δεις τους συντελεστές των μαθημάτων στο progress, ή να κάνεις import το WDP.xls (δες παρακάτω).
+            Κάνε refresh για να μηδενιστούν οι τιμές.</h4>
+
+
+        <!-- Επιλογή σχολής -->
+        <div class = "school-selection">
+            <p id="select-school">Διάλεξε το τμήμα σου: </p>
+            
+        </div>
+
+        <!-- Συντελεστης διπλωματικης ανα σχολη -->
+        <div class="thesis_weight">    
+                       
+        </div>
+        
+
+        <!-- form -->
+        <form action="submit">
+            <label for="fileinput" class="fileinput">Εδώ μπορείς να εισάγεις το αρχείο WDP.xls της αναλυτικής
+                βαθμολογίας σου από το κουμπί "export" στο Progress -> Ακαδημαϊκό έργο, ώστε να συμπληρωθούν αυτόματα τα
+                3 παρακάτω πεδία:
+            </label>
+            <input type="file" id="fileinput" accept=".xls" />
+
+            
+
+            <!-- Περασμένα μαθήματα -->
+            <div class="input">
+                <label for="lessons1">Αριθμός περασμένων μαθημάτων (με συντελεστή 1.5): </label>
+                <input type="number" placeholder="0" name="lessons1" min="0" max="39" required id="lessons1">
+            </div>
+            <div class="input">
+                <label for="lessons2">Αριθμός περασμένων μαθημάτων (με συντελεστή 2): </label>
+                <input type="number" placeholder="0" name="lessons2" min="0" max="27" required id="lessons2">
+            </div>
+            <div class="input">
+                <label for="mo">Τωρινός M.O. πτυχίου: </label>
+                <input type="number" placeholder="0" name="mo" min="5.0" max="10.0" step="0.5" required id="mo">
+            </div>
+
+            <div id="line"></div>
+
+            <!-- Ζητούμενα μαθήματα -->
+            <div class="input" id="input1">
+                <label for="metavolh1">-> Βαθμός νέου μαθήματος (με συντελεστή 1.5): </label>
+                <input type="number" placeholder="0" name="input1" min="5.0" max="10.0" step="0.5" required
+                    id="metavolh1">
+                <button type="button" onclick="addLesson(1.5)" class="add">+</button>
+            </div>
+            <div class="input" id="input2">
+                <label for="metavolh2">-> Βαθμός νέου μαθήματος (με συντελεστή 2): </label>
+                <input type="number" placeholder="0" name="input2" min="5.0" max="10.0" step="0.5" required
+                    id="metavolh2">
+                <button type="button" onclick="addLesson(2)" class="add">+</button>
+            </div>
+            <div class="input">
+                <label for="thesis">-> Βαθμός διπλωματικής: </label>
+                <input id="thesis" type="number" placeholder="0" name="thesis" min="5.0" max="10.0" step="0.5" required
+                    id="thesis">
+            </div>
+
+            <!-- Submit button -->
+            <button type="button" onclick="getMO()" class="btn">Υπολογισμός Νέου Μ.Ο.</button>
+        </form>
+    </main>
+    <!-- footer -->
+    <p>&copy; Γενναίος Λυκουργιώτης & Ιωάννης Τσάμπρας - Αιχμή του δόρατος, 2023
+    <article>Η ειλικρίνεια είναι σαν το λουλούδι</article>
+    </p>
+</body>
+
+<!-- scripts -->
+<script src="script.js"></script>
+
+</html>
