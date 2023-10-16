@@ -157,11 +157,13 @@ function getMO() {
     /////// βαθμος και συντελεστης διπλωματικης ανα σχολη
     let thesis = Number(document.getElementById('thesis').value);
     
-    let thesis_weight
-    if(school == 'ece')
-        thesis_weight = thesis_weights.ece[1]
-    else if (school == 'ceid')
-        thesis_weight = thesis_weights.ceid[1]
+    let thesis_weight;
+
+    for(let sch in thesis_weights){
+        if (school == sch){
+            thesis_weight = thesis_weights[sch][1]
+        }
+    }
 
     // let thesis_label = document.querySelectorAll('label')[8]
     // thesis_label.innerText = `-> Βαθμός διπλωματικής (συντελεστής ${thesis_weight}): `
