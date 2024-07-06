@@ -80,7 +80,7 @@ function readSingleFile(evt) {
                 if (weight == 2.0) {
                     lessons21 = lessons21 + 1;
                 }
-                if (weight == '.12,0' && grade >= 5) {     // don't know why .xls has thesis weight like that (this will probably not work for other schools)
+                if (weight == '.12,0' && grade >= 5) {     // don't know why .xls has thesis weight like that (this if-block will probably not work for other schools)
                     let school = document.querySelector('input[name="school"]:checked').value;
                     weight = thesis_weights[school][1]
                     thesis_grade = grade
