@@ -41,13 +41,12 @@ for(let thesis_w in thesis_weights){
 }
 
 
-////////////////////////////////////////////////////////////////// import WDPS.xls file function
+////////////////////////////////////////////////////////////////// import WDPS.xls file function 
 
 let readSingleFileCounter = 0
 let lessons11 = 0;
 let lessons21 = 0;
 let lessons_thesis = 0;
-
 let average = 0
 
 function readSingleFile(evt) {
@@ -60,7 +59,6 @@ function readSingleFile(evt) {
             var words = ct.split(' ');  //this is not needed
 
             let input_file_as_text = words.join(); //this is bullshit
-            //input_file_as_text = input_file_as_text
             input_file_as_text = input_file_as_text.replace("\n", " "); //remove newline characters
             const regex = /.*([5-9]|10),(0|5).*2.*(1,5|2,0|1,0)/g; // basically match a passing grade (e.g. 8,5 or 10,0 or 5,0) followed by anything and then a "2" (the 2022 following grades in a line, this is to differentiate from other random text that follows thsi pattern) then followed by anything and finally followed by one of 1,0 1,5 1,2
             const found = input_file_as_text.match(regex); //find matches for pattern
@@ -82,7 +80,7 @@ function readSingleFile(evt) {
                 if (weight == 2.0) {
                     lessons21 = lessons21 + 1;
                 }
-                if (weight == '.12,0') {     // don't know why .xls has thesis weight like that
+                if (weight == '.12,0' && grade >= 5) {     // don't know why .xls has thesis weight like that (this will probably not work for other schools)
                     let school = document.querySelector('input[name="school"]:checked').value;
                     weight = thesis_weights[school][1]
                     thesis_grade = grade
@@ -91,7 +89,6 @@ function readSingleFile(evt) {
 
                 grade_sum = grade_sum + parseFloat(grade)*parseFloat(weight);
                 weight_sum = weight_sum + parseFloat(weight);
-
             }
 
             console.log(grade_sum , weight_sum);
@@ -101,9 +98,7 @@ function readSingleFile(evt) {
             document.getElementById("mo").value = average;
             if(lessons_thesis == 1)  document.getElementById("thesis").value = thesis_grade;
 
-            ///////////////////////////////
             readSingleFileCounter++
-            // console.log("lessons: ", lessons1, lessons2, average)
             return { lessons11, lessons21, average, readSingleFileCounter }
 
         }
@@ -168,9 +163,6 @@ function getMO() {
             thesis_weight = thesis_weights[sch][1]
         }
     }
-
-    // let thesis_label = document.querySelectorAll('label')[8]
-    // thesis_label.innerText = `-> Βαθμός διπλωματικής (συντελεστής ${thesis_weight}): `
 
     ////////// αρχικος μ.ο και μεταβλητες υπολογισμου
     let grades = (lessons1 > 0 || lessons2 > 0) ? (lessons1 * 1.5 + lessons2 * 2) : window.alert("Δώσε τα περασμένα μαθήματά σου")
