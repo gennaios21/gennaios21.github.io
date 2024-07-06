@@ -33,24 +33,6 @@ li {
     padding: 2px 0;
 }
 
-@media(max-width: 900px) {
-    body {
-        font-size: 1.2em;
-        max-width: 95vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center;
-        align-items: center; */
-    }
-}
-
 div {
     padding: 10px 0;
 }
@@ -151,4 +133,53 @@ div button:hover {
 
 .thesis_weight p{
     font-size: 1em;
+}
+
+
+
+
+@media(max-width: 900px) {
+    body{
+        max-width: 90vw; 
+    }
+    h1{
+        font-size: 1.2em;
+    }
+    h4{
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    .fileinput{
+        line-height: 1.4;
+        text-align: justify; 
+    }
+
+    .school-selection{
+        font-size: 0.9em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thesis_weight{
+        font-size: 0.9em;
+    }
+
+    form{
+        max-width: 75vw;
+    }
+
+    form .input{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    .add{
+        margin-top: 20px;
+    }
+
+    .input input{
+        margin-top: 20px;
+    }
 }
