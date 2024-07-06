@@ -8,7 +8,7 @@ let thesis_weights = {
 let thesis_weight_info = document.querySelector('.thesis_weight')
 let school_selected = document.querySelector(".school-selection")
 
-let checked_radio = 1 
+let checked_radio = 1
 
 for(let thesis_w in thesis_weights){
 
@@ -46,6 +46,8 @@ for(let thesis_w in thesis_weights){
 let readSingleFileCounter = 0
 let lessons11 = 0;
 let lessons21 = 0;
+let lessons_thesis = 0;
+
 let average = 0
 
 function readSingleFile(evt) {
@@ -62,7 +64,6 @@ function readSingleFile(evt) {
             input_file_as_text = input_file_as_text.replace("\n", " "); //remove newline characters
             const regex = /.*([5-9]|10),(0|5).*2.*(1,5|2,0|1,0)/g; // basically match a passing grade (e.g. 8,5 or 10,0 or 5,0) followed by anything and then a "2" (the 2022 following grades in a line, this is to differentiate from other random text that follows thsi pattern) then followed by anything and finally followed by one of 1,0 1,5 1,2
             const found = input_file_as_text.match(regex); //find matches for pattern
-            console.log(found.length);
             let grade_sum = 0;
             let weight_sum = 0;
             for (let i = 0; i < found.length; i++) {
@@ -71,10 +72,9 @@ function readSingleFile(evt) {
                 let grade = line.split(" ")[5].replace(",", "."); //get 6.5 from 6,5
 
                 let weight = line.split(",,").at(-1).replace(",", ".");
+                let mathima = line.split(" ")[4]
 
-                console.log(i + " " + grade + " " + weight);
-
-
+                // console.log(i + " " + grade + " " + mathima + " " + weight);
 
                 if (weight == 1.5 || weight == 1.0) {
                     lessons11 = lessons11 + 1;
@@ -82,17 +82,24 @@ function readSingleFile(evt) {
                 if (weight == 2.0) {
                     lessons21 = lessons21 + 1;
                 }
+                if (weight == '.12,0') {     // don't know why .xls has thesis weight like that
+                    let school = document.querySelector('input[name="school"]:checked').value;
+                    weight = thesis_weights[school][1]
+                    thesis_grade = grade
+                    lessons_thesis = lessons_thesis + 1;
+                }
 
-                grade_sum = grade_sum + parseFloat(grade * weight);
+                grade_sum = grade_sum + parseFloat(grade)*parseFloat(weight);
                 weight_sum = weight_sum + parseFloat(weight);
-                //console.log(weight_sum);
 
             }
-            console.log(grade_sum / weight_sum);
+
+            console.log(grade_sum , weight_sum);
             average = Math.round(100 * grade_sum / weight_sum) / 100;
             document.getElementById("lessons1").value = lessons11;
             document.getElementById("lessons2").value = lessons21;
             document.getElementById("mo").value = average;
+            if(lessons_thesis == 1)  document.getElementById("thesis").value = thesis_grade;
 
             ///////////////////////////////
             readSingleFileCounter++
