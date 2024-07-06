@@ -72,7 +72,7 @@ function readSingleFile(evt) {
                 let weight = line.split(",,").at(-1).replace(",", ".");
                 let mathima = line.split(" ")[4]
 
-                // console.log(i + " " + grade + " " + mathima + " " + weight);
+                console.log(i + " " + grade + " " + mathima + " " + weight);
 
                 if (weight == 1.5 || weight == 1.0) {
                     lessons11 = lessons11 + 1;
@@ -125,10 +125,11 @@ function getMO() {
 
     else {
         ////////// αριθμος περασμενων μαθηματων + τωρινος Μ.0
-        lessons1 = parseInt(Number(document.querySelectorAll('input')[2].value));
-        lessons2 = parseInt(Number(document.querySelectorAll('input')[3].value));
-        mo = (document.querySelectorAll('input')[4].value);
+        lessons1 = parseInt(Number(document.querySelectorAll('input')[3].value));
+        lessons2 = parseInt(Number(document.querySelectorAll('input')[4].value));
+        mo = (document.querySelectorAll('input')[5].value);
     }
+    console.log(lessons1, lessons2, mo)
 
     ////////// επιλογη σχολης
     let school = document.querySelector('input[name="school"]:checked').value;
