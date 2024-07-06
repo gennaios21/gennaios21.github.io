@@ -95,7 +95,12 @@ function readSingleFile(evt) {
             document.getElementById("lessons1").value = lessons11;
             document.getElementById("lessons2").value = lessons21;
             document.getElementById("mo").value = average;
-            if(lessons_thesis == 1)  document.getElementById("thesis").value = thesis_grade;
+            if(lessons_thesis == 1)  {
+                thesis_text.innerText = `-> Βαθμός διπλωματικής: ${thesis_grade}`
+                thesis_text.style.color = 'red'
+                document.getElementById("thesis").disabled = true;
+                
+            }
 
             readSingleFileCounter++
             return { lessons11, lessons21, average, readSingleFileCounter }
