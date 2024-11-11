@@ -135,7 +135,9 @@ div button:hover {
     font-size: 1em;
 }
 
-
+img{
+    border-radius: 10px;
+}
 
 
 @media(max-width: 900px) {
@@ -181,5 +183,9 @@ div button:hover {
 
     .input input{
         margin-top: 20px;
+    }
+
+    img{
+        width: 250px;
     }
 }
