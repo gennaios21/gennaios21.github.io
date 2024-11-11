@@ -1,10 +1,13 @@
-/////////////////// σε περιπτωση νεου τμηματος, προσθεστε το με την ιδια δομη στην παρακατω λιστα
+////////////////////////// σε περιπτωση νεου τμηματος, προσθεστε το με την ιδια δομη στην παρακατω λιστα
 let thesis_weights = {
     ece : ["ΗΜΤΥ" , 15],
     ceid : ["CEID", 10],
+    chemeng_civil: ["Χημικοί/Πολιτικοί Μηχανικοί", 18],
 }
+let input_counter = Object.keys(thesis_weights).length;
 
-////////////////////// radio button και πληροφοριες διπλωματικης ανα σχολη
+
+///////////////////////////////////////////////// radio button και πληροφοριες διπλωματικης ανα σχολη
 let thesis_weight_info = document.querySelector('.thesis_weight')
 let school_selected = document.querySelector(".school-selection")
 
@@ -116,7 +119,7 @@ function readSingleFile(evt) {
 }
 document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
 
-////////////////////////////////////////////////////// calculate average 
+////////////////////////////////////////////////////// read inputs and calculate average 
 function getMO() {
     let lessons1, lessons2, mo
 
@@ -129,13 +132,14 @@ function getMO() {
 
     else {
         ////////// αριθμος περασμενων μαθηματων + τωρινος Μ.0
-        lessons1 = parseInt(Number(document.querySelectorAll('input')[3].value));
-        lessons2 = parseInt(Number(document.querySelectorAll('input')[4].value));
-        mo = (document.querySelectorAll('input')[5].value);
+        lessons1 = parseInt(Number(document.querySelectorAll('input')[input_counter+1].value));
+        lessons2 = parseInt(Number(document.querySelectorAll('input')[input_counter+2].value));
+        mo = (document.querySelectorAll('input')[input_counter+3].value);
     }
 
     ////////// επιλογη σχολης
     let school = document.querySelector('input[name="school"]:checked').value;
+    console.log("input_counter", input_counter)
 
     ////////// διπλωματικη + βαθμοι μαθηματων
     let lesson = document.querySelectorAll('input')
